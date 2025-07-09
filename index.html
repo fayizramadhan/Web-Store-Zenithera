@@ -574,11 +574,6 @@
       document.querySelectorAll("#order-btn").forEach(btn => {
         btn.innerText = teks[lang].order;
       });
-      
-      // Update product names
-      document.querySelectorAll(".produk").forEach((el, i) => {
-        el.innerText = teks[lang].produk + (i > 0 ? " " + (i + 1) : "");
-      });
     }
 
     function showQRISModal() {
