@@ -429,8 +429,8 @@
     <div class="exit-confirm" id="exitConfirm">
       <p id="exit-confirm-text">Apakah Anda yakin ingin keluar dari situs?</p>
       <div class="exit-confirm-btns">
-        <button class="exit-confirm-btn exit-confirm-yes" id="exit-yes">Ya</button>
-        <button class="exit-confirm-btn exit-confirm-no" id="exit-no">Tidak</button>
+        <button class="exit-confirm-btn exit-confirm-yes" id="exit-yes" onclick="exitSite()">Ya</button>
+        <button class="exit-confirm-btn exit-confirm-no" id="exit-no" onclick="hideExitConfirm()">Tidak</button>
       </div>
     </div>
   </main>
@@ -493,15 +493,21 @@
 
     function showExitConfirm() {
       document.getElementById("exitConfirm").style.display = "block";
+      document.getElementById("floatingMenu").style.display = "none";
     }
 
     function hideExitConfirm() {
       document.getElementById("exitConfirm").style.display = "none";
     }
 
-    function forceExit() {
-      window.open('', '_self');
-      window.close();
+    function exitSite() {
+      // Try to close the window (works for windows opened by JavaScript)
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // If no history, redirect to a safe page
+        window.location.href = "about:blank";
+      }
     }
 
     function changeLang(lang) {
