@@ -15,6 +15,10 @@
       --notif-glow: 0 0 15px #a970ff;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -22,6 +26,7 @@
       color: var(--text-dark);
       background-image: url('https://i.ibb.co/DKDrWR4/galaxy-bg.jpg');
       background-size: cover;
+      background-attachment: fixed;
       transition: 0.3s;
     }
 
@@ -32,15 +37,15 @@
 
     header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
       background-color: rgba(0,0,0,0.7);
       padding: 1rem;
+      flex-wrap: wrap;
     }
 
     header img {
       height: 40px;
-      margin-bottom: 0.5rem;
     }
 
     .mode-toggle {
@@ -51,17 +56,18 @@
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 10px;
-      margin-top: 0.5rem;
     }
 
     h1 {
       margin: 0;
       font-size: 1.8rem;
+      text-align: center;
+      flex-grow: 1;
     }
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
       padding: 1rem;
     }
@@ -87,7 +93,6 @@
       font-weight: bold;
       border-radius: 10px;
       text-decoration: none;
-      box-shadow: 0 0 10px #25D366;
       display: inline-block;
     }
 
@@ -127,13 +132,6 @@
       z-index: 9999;
     }
 
-    @keyframes fade {
-      0% { opacity: 0; transform: translateY(20px); }
-      10% { opacity: 1; transform: translateY(0); }
-      90% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(20px); }
-    }
-
     footer {
       text-align: center;
       padding: 1rem;
@@ -141,13 +139,14 @@
     }
 
     #qris-img {
-      max-width: 300px;
+      max-width: 100%;
+      max-height: 300px;
       transition: transform 0.3s;
       cursor: zoom-in;
     }
 
     #qris-img:hover {
-      transform: scale(1.3);
+      transform: scale(1.1);
     }
 
     .rules {
@@ -197,22 +196,37 @@
       text-align: center;
       text-decoration: none;
     }
-  </style>
-</head>
-<body>
-  <header style="display: flex; justify-content: space-between; align-items: center; background-color: rgba(0,0,0,0.7); padding: 1rem;">
-  <div style="flex: 1; display: flex; align-items: center;">
-    <img src="https://files.catbox.moe/clyzxk.jpg" alt="ZenithMarket Logo" style="height: 40px;" />
-  </div>
-  <div style="flex: 1; text-align: center;">
-    <h1 id="judul" style="margin: 0; color: white; font-size: 1.8rem;">Zenith Market</h1>
-  </div>
-  <div style="flex: 1; text-align: right;">
-    <button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
-  </div>
-</header>
 
-  <main>
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      header div {
+        margin: 0.5rem 0;
+      }
+      .mode-toggle {
+        margin-top: 0.5rem;
+      }
+    
+
+      }
+    </style>
+  </head>
+  <body>
+    <header style="display: flex; justify-content: space-between; align-items: center; background-color: rgba(0,0,0,0.7); padding: 1rem;">
+    <div style="flex: 1; display: flex; align-items: center;">
+    <img src="https://files.catbox.moe/clyzxk.jpg" alt="ZenithMarket Logo" style="height: 40px;" />
+    </div>
+    <div style="flex: 1; text-align: center;">
+      <h1 id="judul" style="margin: 0; color: white; font-size: 1.8rem;">Zenith Market</h1>
+    </div>
+    <div style="flex: 1; text-align: right;">
+      <button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+    </div>
+  </header>
+
+    <main>
     <section class="products">
       <div class="product"><img src="https://files.catbox.moe/zpsevm.jpg" /><p class="produk">Top Up MLBB</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
       <div class="product"><img src="https://files.catbox.moe/5zynmh.png" /><p class="produk">Top Up FF</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
