@@ -8,8 +8,8 @@
     :root {
       --bg-dark: #0d0d1a;
       --bg-light: #f0f0ff;
-      --text-dark: #ffffff; /* Warna teks tetap putih */
-      --text-light: #ffffff; /* Warna teks tetap putih meski light mode */
+      --text-dark: #ffffff;
+      --text-light: #ffffff;
       --accent: #7f00ff;
       --notif-bg: linear-gradient(135deg, #320d6d, #8e2de2);
       --notif-glow: 0 0 15px #a970ff;
@@ -40,32 +40,31 @@
     }
 
     .light-mode .product {
-      border: 3px solid; /* Border lebih tebal */
+      border: 3px solid;
       color: var(--text-light);
       background: var(--content-bg-light);
     }
 
     .light-mode .gateway {
-      border: 3px solid; /* Border lebih tebal */
+      border: 3px solid;
       color: var(--text-light);
       background: var(--content-bg-light);
     }
 
     .product {
-      border: 3px solid; /* Border lebih tebal */
+      border: 3px solid;
       background: var(--content-bg-dark);
       color: var(--text-dark);
       transition: all 0.3s ease;
     }
 
     .gateway {
-      border: 3px solid; /* Border lebih tebal */
+      border: 3px solid;
       background: var(--content-bg-dark);
       color: var(--text-dark);
       transition: all 0.3s ease;
     }
 
-    /* Animasi border RGB */
     @keyframes rainbow-border {
       0% { border-color: rgb(255, 0, 0); }
       16% { border-color: rgb(255, 0, 255); }
@@ -199,7 +198,7 @@
     .rules {
       margin-top: 1rem;
       font-size: 0.9rem;
-      color: white; /* Warna teks perhatian diubah menjadi putih permanen */
+      color: white;
     }
 
     .floating-menu-toggle {
@@ -311,7 +310,6 @@
       cursor: pointer;
     }
 
-    /* Custom exit confirmation dialog */
     .exit-confirm {
       position: fixed;
       top: 50%;
@@ -394,23 +392,23 @@
 
   <main>
     <section class="products">
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/zpsevm.jpg" /><p class="produk">Top Up MLBB</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/jmvayw.png" /><p class="produk">Top Up FF</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://qu.ax/acLyy.jpg" /><p class="produk">Apk QRIS</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/clyzxk.jpg" /><p class="produk">Apk Logo</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/usxxr1.jpg" /><p class="produk">Apk Bioskop</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/fw9e24.png" /><p class="produk">Apk Spam Otp</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/76068g.png" /><p class="produk">Sewa Akun FF</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/2gtu8o.jpg" /><p class="produk">Pemulihan Wa</p><a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border"><img src="https://files.catbox.moe/zpsevm.jpg" /><p class="produk">Top Up MLBB</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border"><img src="https://files.catbox.moe/jmvayw.png" /><p class="produk">Top Up FF</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border"><img src="https://qu.ax/acLyy.jpg" /><p class="produk">Apk QRIS</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border"><img src="https://files.catbox.moe/clyzxk.jpg" /><p class="produk">Apk Logo</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border"><img src="https://files.catbox.moe/usxxr1.jpg" /><p class="produk">Apk Bioskop</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border"><img src="https://files.catbox.moe/fw9e24.png" /><p class="produk">Apk Spam Otp</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border"><img src="https://files.catbox.moe/76068g.png" /><p class="produk">Sewa Akun FF</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border"><img src="https://files.catbox.moe/2gtu8o.jpg" /><p class="produk">Pemulihan WA</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
     </section>
 
     <section class="gateway rainbow-border">
       <h2 id="judul-pembayaran">Pembayaran Digital</h2>
-      <p>082217179612 <button class="copy-btn" onclick="copy('082217179612')">Salin</button></p>
-      <p>082350804883 <button class="copy-btn" onclick="copy('082350804883')">Salin</button></p>
-      <p>082350804883 <button class="copy-btn" onclick="copy('082350804883')">Salin</button></p>
+      <p>082217179612 <button class="copy-btn" id="copy-btn" onclick="copy('082217179612')">Salin</button></p>
+      <p>082350804883 <button class="copy-btn" id="copy-btn" onclick="copy('082350804883')">Salin</button></p>
+      <p>082350804883 <button class="copy-btn" id="copy-btn" onclick="copy('082350804883')">Salin</button></p>
       <p>QRIS:<br><img id="qris-img" src="https://qu.ax/acLyy.jpg" alt="QRIS" /></p>
-      <button class="zoom-btn" onclick="showQRISModal()">🔍 Perbesar QRIS</button>
+      <button class="zoom-btn" id="zoom-btn" onclick="showQRISModal()">🔍 Perbesar QRIS</button>
       <p class="rules" id="teks-peraturan">📌 <strong>Perhatian:</strong> Pastikan nominal transfer sesuai dan kirim bukti pembayaran ke admin setelah melakukan transaksi.</p>
     </section>
 
@@ -419,7 +417,7 @@
       <button onclick="changeLang('id')">🇮🇩 Indonesia</button>
       <button onclick="changeLang('en')">🇺🇸 English</button>
       <button onclick="changeLang('ar')">🇸🇦 العربية</button>
-      <a href="https://chat.whatsapp.com/CDdrH8awkxUGv7hsp8BsZo?mode=ac_c" target="_blank">Gabung Grup Kami</a>
+      <a href="https://chat.whatsapp.com/CDdrH8awkxUGv7hsp8BsZo?mode=ac_c" target="_blank" id="group-link">Gabung Grup Kami</a>
       <button onclick="showExitConfirm()" id="exit">Keluar Situs</button>
     </div>
 
@@ -428,12 +426,11 @@
       <img class="modal-content" id="modal-qris-img" src="https://qu.ax/acLyy.jpg">
     </div>
 
-    <!-- Custom exit confirmation dialog -->
     <div class="exit-confirm" id="exitConfirm">
-      <p>Apakah Anda yakin ingin keluar dari situs?</p>
+      <p id="exit-confirm-text">Apakah Anda yakin ingin keluar dari situs?</p>
       <div class="exit-confirm-btns">
-        <button class="exit-confirm-btn exit-confirm-yes" onclick="forceExit()">Ya</button>
-        <button class="exit-confirm-btn exit-confirm-no" onclick="hideExitConfirm()">Tidak</button>
+        <button class="exit-confirm-btn exit-confirm-yes" id="exit-yes">Ya</button>
+        <button class="exit-confirm-btn exit-confirm-no" id="exit-no">Tidak</button>
       </div>
     </div>
   </main>
@@ -445,13 +442,10 @@
   <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
 
   <script>
-    // Variable untuk menyimpan status RGB
     let rgbEnabled = true;
 
     function toggleMode() {
       document.body.classList.toggle('light-mode');
-      
-      // Toggle RGB border
       toggleRGB();
     }
 
@@ -466,7 +460,6 @@
       } else {
         elements.forEach(el => {
           el.style.animation = 'none';
-          // Set default border color based on current mode
           if (document.body.classList.contains('light-mode')) {
             el.style.borderColor = 'black';
           } else {
@@ -513,21 +506,78 @@
 
     function changeLang(lang) {
       const teks = {
-        id: {judul: "Zenith Market", pembayaran: "Pembayaran Digital", peraturan: "📌 Perhatian: Pastikan nominal transfer sesuai dan kirim bukti pembayaran ke admin setelah melakukan transaksi.", produk: "Produk", qris: "🔍 Perbesar QRIS", notif: "✨ Nomor berhasil disalin ke clipboard! 🚀", grup: "Gabung Grup Kami", keluar: "Keluar Situs", exitConfirm: "Apakah Anda yakin ingin keluar dari situs?", exitYes: "Ya", exitNo: "Tidak"},
-        en: {judul: "Zenith Market", pembayaran: "Digital Payment", peraturan: "📌 Attention: Make sure the transfer amount is correct and send proof of payment to the admin after making the transaction.", produk: "Product", qris: "🔍 Enlarge Qris", notif: "✨ Number successfully copied to clipboard! 🚀", grub: "Join Our Group", keluar: "Exit Site", exitConfirm: "Are you sure you want to exit the site?", exitYes: "Yes", exitNo: "No"},
-        ar: {judul: "سوق زينيث", pembayaran: "الدفع الرقمي", peraturan: "📌تنبيه: تأكد من صحة مبلغ التحويل وأرسل إثبات الدفع إلى المسؤول بعد إجراء المعاملة.", produk: "المنتج ", qris: "🔍 تكبير QRIS", notif: "✨ تم نسخ الرقم إلى الحافظة بنجاح! 🚀", notif: "انضم إلى مجموعتنا", keluar: "الخروج من الموقع", exitConfirm: "هل أنت متأكد أنك تريد الخروج من الموقع؟", exitYes: "نعم", exitNo: "لا"}
+        id: {
+          judul: "Zenith Market", 
+          pembayaran: "Pembayaran Digital", 
+          peraturan: "📌 Perhatian: Pastikan nominal transfer sesuai dan kirim bukti pembayaran ke admin setelah melakukan transaksi.", 
+          produk: "Produk", 
+          qris: "🔍 Perbesar QRIS", 
+          notif: "✨ Nomor berhasil disalin ke clipboard! 🚀", 
+          salin: "Salin", 
+          order: "Order Sekarang", 
+          grup: "Gabung Grup Kami", 
+          keluar: "Keluar Situs", 
+          exitConfirm: "Apakah Anda yakin ingin keluar dari situs?", 
+          exitYes: "Ya", 
+          exitNo: "Tidak"
+        },
+        en: {
+          judul: "Zenith Market", 
+          pembayaran: "Digital Payment", 
+          peraturan: "📌 Attention: Make sure the transfer amount is correct and send proof of payment to the admin after making the transaction.", 
+          produk: "Product", 
+          qris: "🔍 Enlarge QRIS", 
+          notif: "✨ Number successfully copied to clipboard! 🚀", 
+          salin: "Copy", 
+          order: "Order Now", 
+          grup: "Join Our Group", 
+          keluar: "Exit Site", 
+          exitConfirm: "Are you sure you want to exit the site?", 
+          exitYes: "Yes", 
+          exitNo: "No"
+        },
+        ar: {
+          judul: "سوق زينيث", 
+          pembayaran: "الدفع الرقمي", 
+          peraturan: "📌تنبيه: تأكد من صحة مبلغ التحويل وأرسل إثبات الدفع إلى المسؤول بعد إجراء المعاملة.", 
+          produk: "المنتج", 
+          qris: "🔍 تكبير QRIS", 
+          notif: "✨ تم نسخ الرقم إلى الحافظة بنجاح! 🚀", 
+          salin: "نسخ", 
+          order: "اطلب الآن", 
+          grup: "انضم إلى مجموعتنا", 
+          keluar: "الخروج من الموقع", 
+          exitConfirm: "هل أنت متأكد أنك تريد الخروج من الموقع؟", 
+          exitYes: "نعم", 
+          exitNo: "لا"
+        }
       };
+      
+      // Update all text elements
       document.getElementById("judul").innerText = teks[lang].judul;
       document.getElementById("judul-pembayaran").innerText = teks[lang].pembayaran;
       document.getElementById("teks-peraturan").innerText = teks[lang].peraturan;
-      document.getElementByOneclick("zoom-btn").innerText = teks[lang].qris;
+      document.getElementById("zoom-btn").innerText = teks[lang].qris;
       document.getElementById("notif").innerText = teks[lang].notif;
       document.getElementById("exit").innerText = teks[lang].keluar;
-      document.getElementById("exitConfirm").querySelector("p").innerText = teks[lang].exitConfirm;
-      document.querySelector(".exit-confirm-yes").innerText = teks[lang].exitYes;
-      document.querySelector(".exit-confirm-no").innerText = teks[lang].exitNo;
+      document.getElementById("exit-confirm-text").innerText = teks[lang].exitConfirm;
+      document.getElementById("exit-yes").innerText = teks[lang].exitYes;
+      document.getElementById("exit-no").innerText = teks[lang].exitNo;
+      document.getElementById("group-link").innerText = teks[lang].grup;
+      
+      // Update all copy buttons
+      document.querySelectorAll("#copy-btn").forEach(btn => {
+        btn.innerText = teks[lang].salin;
+      });
+      
+      // Update all order buttons
+      document.querySelectorAll("#order-btn").forEach(btn => {
+        btn.innerText = teks[lang].order;
+      });
+      
+      // Update product names
       document.querySelectorAll(".produk").forEach((el, i) => {
-        el.innerText = teks[lang].produk + (i + 1);
+        el.innerText = teks[lang].produk + (i > 0 ? " " + (i + 1) : "");
       });
     }
 
@@ -540,7 +590,6 @@
       document.getElementById("qris-modal").style.display = "none";
     }
 
-    // Close modal when clicking outside the image
     window.onclick = function(event) {
       const modal = document.getElementById("qris-modal");
       const exitModal = document.getElementById("exitConfirm");
