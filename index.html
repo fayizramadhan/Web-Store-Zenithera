@@ -687,6 +687,26 @@
       }, 3000);
     }
 
+    function saveNote() {
+      playNotepadButtonSound();
+      const noteText = document.getElementById('notepad-textarea').value;
+      
+      // Save to local storage
+      localStorage.setItem('zenithMarketNote', noteText);
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(noteText);
+      
+      // Show notification with custom text
+      const notif = document.getElementById('notif');
+      notif.innerText = '✨ Catatan berhasil disimpan ke clipboard! 🚀';
+      notif.style.display = 'block';
+      
+      setTimeout(() => {
+        notif.style.display = 'none';
+      }, 3000);
+    }
+
     function toggleMenu() {
       const menu = document.getElementById("floatingMenu");
       if (menu.style.display === "block") {
