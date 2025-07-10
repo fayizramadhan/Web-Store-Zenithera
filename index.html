@@ -57,6 +57,12 @@
       background: var(--content-bg-light);
     }
 
+    .light-mode .notepad {
+      border: 3px solid;
+      color: var(--text-light);
+      background: var(--content-bg-light);
+    }
+
     .product {
       border: 3px solid;
       background: var(--content-bg-dark);
@@ -72,6 +78,17 @@
     }
     
     .calculator {
+      border: 3px solid;
+      background: var(--content-bg-dark);
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+      margin: 2rem;
+      padding: 1rem;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+    }
+    
+    .notepad {
       border: 3px solid;
       background: var(--content-bg-dark);
       color: var(--text-dark);
@@ -441,6 +458,63 @@
       font-size: 1.2rem;
       min-height: 2.5rem;
     }
+    
+    /* Notepad Styles */
+    .notepad-title {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .notepad-textarea {
+      width: 100%;
+      height: 200px;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      background: rgba(0,0,0,0.2);
+      color: white;
+      font-size: 1rem;
+      resize: vertical;
+      margin-bottom: 1rem;
+    }
+    
+    .notepad-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    
+    .notepad-btn {
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      flex: 1;
+    }
+    
+    .notepad-btn:hover {
+      background: #6a00d4;
+    }
+    
+    .notepad-btn.save {
+      background: #25D366;
+    }
+    
+    .notepad-btn.save:hover {
+      background: #1da851;
+    }
+    
+    .notepad-btn.clear {
+      background: #ff4d4d;
+    }
+    
+    .notepad-btn.clear:hover {
+      background: #e04444;
+    }
 
     @media (max-width: 600px) {
       header {
@@ -460,6 +534,9 @@
       .notif {
         width: 90%;
         top: 10px;
+      }
+      .notepad-buttons {
+        flex-direction: column;
       }
     }
   </style>
@@ -527,6 +604,16 @@
       </div>
       <div class="calculator-result" id="calculator-result"></div>
     </section>
+    
+    <!-- Notepad Section -->
+    <section class="notepad rainbow-border">
+      <h2 class="notepad-title" id="notepad-title">Catatan Digital</h2>
+      <textarea class="notepad-textarea" id="notepad-textarea" placeholder="Tulis catatan Anda di sini..."></textarea>
+      <div class="notepad-buttons">
+        <button class="notepad-btn save" onclick="saveNote()">💾 Simpan</button>
+        <button class="notepad-btn clear" onclick="clearNote()">🧹 Bersihkan</button>
+      </div>
+    </section>
 
     <button class="floating-menu-toggle" onclick="toggleMenu()">☰ Menu</button>
     <div class="floating-menu" id="floatingMenu">
@@ -558,6 +645,10 @@
   <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
   <!-- Added calculator button sound -->
   <audio id="calculatorSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
+  <!-- Added notepad button sound -->
+  <audio id="notepadSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
+  <!-- Added new notepad button sound -->
+  <audio id="notepadButtonSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
 
   <script>
     let rgbEnabled = true;
@@ -637,6 +728,7 @@
           produk: "Produk", 
           qris: "🔍 Perbesar QRIS", 
           notif: "✨ Nomor berhasil disalin ke clipboard! 🚀", 
+          notifSave: "✨ Catatan berhasil disimpan ke clipboard! 🚀",
           salin: "Salin", 
           order: "Order Sekarang", 
           grup: "Gabung Grup Kami", 
@@ -644,15 +736,20 @@
           exitConfirm: "Apakah Anda yakin ingin keluar dari situs?", 
           exitYes: "Ya", 
           exitNo: "Tidak",
-          calculator: "Kalkulator Digital"
+          calculator: "Kalkulator Digital",
+          notepad: "Catatan Digital",
+          notepadPlaceholder: "Tulis catatan Anda di sini...",
+          save: "💾 Simpan",
+          clear: "🧹 Bersihkan"
         },
         en: {
           judul: "Zenith Market", 
           pembayaran: "Digital Payment", 
-          peraturan: "📌 Attention: Make sure the transfer amount is correct and send proof of payment to the admin after making the transaction.", 
+          peraturan: "📌 Attention: Make sure the transfer amount is correct and send proof of payment to the admin after making the transaction.",
           produk: "Product", 
           qris: "🔍 Enlarge QRIS", 
-          notif: "✨ Number successfully copied to clipboard! 🚀", 
+          notif: "✨ Note successfully saved to clipboard! 🚀", 
+          notifSave: "text_text",
           salin: "Copy", 
           order: "Order Now", 
           grup: "Join Our Group", 
@@ -660,7 +757,11 @@
           exitConfirm: "Are you sure you want to exit the site?", 
           exitYes: "Yes", 
           exitNo: "No",
-          calculator: "Digital Calculator"
+          calculator: "Digital Calculator",
+          notepad: "Digital Notepad",
+          notepadPlaceholder: "Write your notes here...",
+          save: "💾 Save",
+          clear: "🧹 Clear"
         },
         ar: {
           judul: "سوق زينيث", 
@@ -669,6 +770,7 @@
           produk: "المنتج", 
           qris: "🔍 تكبير QRIS", 
           notif: "✨ تم نسخ الرقم إلى الحافظة بنجاح! 🚀", 
+          notifSave: "✨ تم حفظ الملاحظة في الحافظة بنجاح! 🚀",
           salin: "نسخ", 
           order: "اطلب الآن", 
           grup: "انضم إلى مجموعتنا", 
@@ -676,7 +778,11 @@
           exitConfirm: "هل أنت متأكد أنك تريد الخروج من الموقع؟", 
           exitYes: "نعم", 
           exitNo: "لا",
-          calculator: "آلة حاسبة رقمية"
+          calculator: "آلة حاسبة رقمية",
+          notepad: "دفتر ملاحظات رقمي",
+          notepadPlaceholder: "اكتب ملاحظاتك هنا...",
+          save: "💾 حفظ",
+          clear: "🧹 مسح"
         }
       };
       
@@ -692,6 +798,8 @@
       document.getElementById("exit-no").innerText = teks[lang].exitNo;
       document.getElementById("group-link").innerText = teks[lang].grup;
       document.getElementById("calculator-title").innerText = teks[lang].calculator;
+      document.getElementById("notepad-title").innerText = teks[lang].notepad;
+      document.getElementById("notepad-textarea").placeholder = teks[lang].notepadPlaceholder;
       
       // Update all copy buttons
       document.querySelectorAll("#copy-btn").forEach(btn => {
@@ -701,6 +809,14 @@
       // Update all order buttons
       document.querySelectorAll("#order-btn").forEach(btn => {
         btn.innerText = teks[lang].order;
+      });
+      
+      // Update notepad buttons
+      document.querySelectorAll(".notepad-btn.save").forEach(btn => {
+        btn.innerText = teks[lang].save;
+      });
+      document.querySelectorAll(".notepad-btn.clear").forEach(btn => {
+        btn.innerText = teks[lang].clear;
       });
     }
 
@@ -761,6 +877,64 @@
         resultElement.innerText = 'Hasil: ' + result;
       } catch (error) {
         resultElement.innerText = 'Error';
+      }
+    }
+    
+    // Notepad Functions
+    function playNotepadSound() {
+      const sound = document.getElementById('notepadSound');
+      sound.currentTime = 0;
+      sound.play();
+    }
+    
+    function playNotepadButtonSound() {
+      const sound = document.getElementById('notepadButtonSound');
+      sound.currentTime = 0;
+      sound.play();
+    }
+    
+    // Load saved note when page loads
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const savedNote = localStorage.getItem('zenithMarketNote');
+      if (savedNote) {
+        document.getElementById('notepad-textarea').value = savedNote;
+      }
+    });
+    
+    function saveNote() {
+      playNotepadButtonSound();
+      const noteText = document.getElementById('notepad-textarea').value;
+      
+      // Save to local storage
+      localStorage.setItem('zenithMarketNote', noteText);
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(noteText);
+      
+      // Show notification with custom text
+      const notif = document.getElementById('notif');
+      notif.innerText = 'text_text';
+      notif.style.display = 'block';
+      
+      setTimeout(() => {
+        notif.style.display = 'none';
+      }, 3000);
+    }
+    
+    function clearNote() {
+      playNotepadButtonSound();
+      if (confirm('Apakah Anda yakin ingin menghapus catatan ini?')) {
+        document.getElementById('notepad-textarea').value = '';
+        localStorage.removeItem('zenithMarketNote');
+        
+        // Show notification
+        const notif = document.getElementById('notif');
+        notif.innerText = '✨ Catatan berhasil dihapus! 🚀';
+        notif.style.display = 'block';
+        
+        setTimeout(() => {
+          notif.style.display = 'none';
+        }, 3000);
       }
     }
   </script>
