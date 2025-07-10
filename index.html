@@ -39,55 +39,18 @@
       color: var(--text-light);
     }
 
-    .light-mode .product {
-      border: 3px solid;
-      color: var(--text-light);
-      background: var(--content-bg-light);
-    }
-
-    .light-mode .gateway {
-      border: 3px solid;
-      color: var(--text-light);
-      background: var(--content-bg-light);
-    }
-
-    .light-mode .calculator {
-      border: 3px solid;
-      color: var(--text-light);
-      background: var(--content-bg-light);
-    }
-
+    .light-mode .product,
+    .light-mode .gateway,
+    .light-mode .calculator,
     .light-mode .notepad {
       border: 3px solid;
       color: var(--text-light);
       background: var(--content-bg-light);
     }
 
-    .product {
-      border: 3px solid;
-      background: var(--content-bg-dark);
-      color: var(--text-dark);
-      transition: all 0.3s ease;
-    }
-
-    .gateway {
-      border: 3px solid;
-      background: var(--content-bg-dark);
-      color: var(--text-dark);
-      transition: all 0.3s ease;
-    }
-    
-    .calculator {
-      border: 3px solid;
-      background: var(--content-bg-dark);
-      color: var(--text-dark);
-      transition: all 0.3s ease;
-      margin: 2rem;
-      padding: 1rem;
-      border-radius: 15px;
-      backdrop-filter: blur(5px);
-    }
-    
+    .product,
+    .gateway,
+    .calculator,
     .notepad {
       border: 3px solid;
       background: var(--content-bg-dark);
@@ -151,10 +114,7 @@
     }
 
     .product {
-      border-radius: 15px;
-      padding: 1rem;
       text-align: center;
-      backdrop-filter: blur(5px);
     }
 
     .product img {
@@ -171,18 +131,6 @@
       border-radius: 10px;
       text-decoration: none;
       display: inline-block;
-    }
-
-    .gateway {
-      margin: 2rem;
-      padding: 1rem;
-      border-radius: 15px;
-    }
-
-    .gateway img.icon {
-      width: 30px;
-      margin-right: 10px;
-      vertical-align: middle;
     }
 
     .copy-btn {
@@ -435,6 +383,7 @@
     
     .calculator-btn.equals {
       background: #25D366;
+      grid-row: span 2;
     }
     
     .calculator-btn.equals:hover {
@@ -538,18 +487,21 @@
       .notepad-buttons {
         flex-direction: column;
       }
+      .products {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <header style="display: flex; justify-content: space-between; align-items: center; background-color: rgba(0,0,0,0.7); padding: 1rem;">
-    <div style="flex: 1; display: flex; align-items: center;">
-      <img src="https://files.catbox.moe/clyzxk.jpg" alt="ZenithMarket Logo" style="height: 40px;" />
+  <header>
+    <div>
+      <img src="https://files.catbox.moe/clyzxk.jpg" alt="ZenithMarket Logo" />
     </div>
-    <div style="flex: 1; text-align: center;">
-      <h1 id="judul" style="margin: 0; color: white; font-size: 1.8rem;">Zenith Market</h1>
+    <div>
+      <h1 id="judul">Zenith Market</h1>
     </div>
-    <div style="flex: 1; text-align: right;">
+    <div>
       <button class="mode-toggle" onclick="toggleMode()">RGB Mode</button>
     </div>
   </header>
@@ -559,23 +511,55 @@
   
   <main>
     <section class="products">
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/zpsevm.jpg" /><p class="produk">Top Up MLBB</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/jmvayw.png" /><p class="produk">Top Up FF</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://qu.ax/acLyy.jpg" /><p class="produk">Apk QRIS</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/clyzxk.jpg" /><p class="produk">Apk Logo</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/usxxr1.jpg" /><p class="produk">Apk Bioskop</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/fw9e24.png" /><p class="produk">Apk Spam Otp</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/76068g.png" /><p class="produk">Sewa Akun FF</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
-      <div class="product rainbow-border"><img src="https://files.catbox.moe/2gtu8o.jpg" /><p class="produk">Pemulihan WA</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
+      <div class="product rainbow-border">
+        <img src="https://files.catbox.moe/zpsevm.jpg" alt="MLBB" />
+        <p class="produk">Top Up MLBB</p>
+        <a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a>
+      </div>
+      <div class="product rainbow-border">
+        <img src="https://files.catbox.moe/jmvayw.png" alt="Free Fire" />
+        <p class="produk">Top Up FF</p>
+        <a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a>
+      </div>
+      <div class="product rainbow-border">
+        <img src="https://qu.ax/acLyy.jpg" alt="QRIS" />
+        <p class="produk">Apk QRIS</p>
+        <a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a>
+      </div>
+      <div class="product rainbow-border">
+        <img src="https://files.catbox.moe/clyzxk.jpg" alt="Logo" />
+        <p class="produk">Apk Logo</p>
+        <a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a>
+      </div>
+      <div class="product rainbow-border">
+        <img src="https://files.catbox.moe/usxxr1.jpg" alt="Bioskop" />
+        <p class="produk">Apk Bioskop</p>
+        <a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a>
+      </div>
+      <div class="product rainbow-border">
+        <img src="https://files.catbox.moe/fw9e24.png" alt="Spam OTP" />
+        <p class="produk">Apk Spam Otp</p>
+        <a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a>
+      </div>
+      <div class="product rainbow-border">
+        <img src="https://files.catbox.moe/76068g.png" alt="Sewa FF" />
+        <p class="produk">Sewa Akun FF</p>
+        <a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a>
+      </div>
+      <div class="product rainbow-border">
+        <img src="https://files.catbox.moe/2gtu8o.jpg" alt="Pemulihan WA" />
+        <p class="produk">Pemulihan WA</p>
+        <a class="order-button" href="https://wa.me/6282350804883">Order Sekarang</a>
+      </div>
     </section>
 
     <section class="gateway rainbow-border">
       <h2 id="judul-pembayaran">Pembayaran Digital</h2>
-      <p>082217179612 <button class="copy-btn" id="copy-btn" onclick="copy('082217179612')">Salin</button></p>
-      <p>082350804883 <button class="copy-btn" id="copy-btn" onclick="copy('082350804883')">Salin</button></p>
-      <p>082350804883 <button class="copy-btn" id="copy-btn" onclick="copy('082350804883')">Salin</button></p>
+      <p>082217179612 <button class="copy-btn" onclick="copy('082217179612')">Salin</button></p>
+      <p>082350804883 <button class="copy-btn" onclick="copy('082350804883')">Salin</button></p>
+      <p>082350804883 <button class="copy-btn" onclick="copy('082350804883')">Salin</button></p>
       <p>QRIS:<br><img id="qris-img" src="https://qu.ax/acLyy.jpg" alt="QRIS" /></p>
-      <button class="zoom-btn" id="zoom-btn" onclick="showQRISModal()">🔍 Perbesar QRIS</button>
+      <button class="zoom-btn" onclick="showQRISModal()">🔍 Perbesar QRIS</button>
       <p class="rules" id="teks-peraturan">📌 <strong>Perhatian:</strong> Pastikan nominal transfer sesuai dan kirim bukti pembayaran ke admin setelah melakukan transaksi.</p>
     </section>
     
@@ -599,7 +583,7 @@
         <button class="calculator-btn" onclick="calculatorAppend('1')">1</button>
         <button class="calculator-btn" onclick="calculatorAppend('2')">2</button>
         <button class="calculator-btn" onclick="calculatorAppend('3')">3</button>
-        <button class="calculator-btn equals" onclick="calculatorCalculate()" style="grid-row: span 2;">=</button>
+        <button class="calculator-btn equals" onclick="calculatorCalculate()">=</button>
         <button class="calculator-btn" onclick="calculatorAppend('0')" style="grid-column: span 2;">0</button>
         <button class="calculator-btn" onclick="calculatorAppend('.')">.</button>
       </div>
@@ -627,14 +611,14 @@
 
     <div id="qris-modal" class="modal">
       <span class="close-modal" onclick="closeModal()">&times;</span>
-      <img class="modal-content" id="modal-qris-img" src="https://qu.ax/acLyy.jpg">
+      <img class="modal-content" id="modal-qris-img" src="https://qu.ax/acLyy.jpg" alt="QRIS Modal">
     </div>
 
     <div class="exit-confirm" id="exitConfirm">
       <p id="exit-confirm-text">Apakah Anda yakin ingin keluar dari situs?</p>
       <div class="exit-confirm-btns">
-        <button class="exit-confirm-btn exit-confirm-yes" id="exit-yes" onclick="exitSite()">Ya</button>
-        <button class="exit-confirm-btn exit-confirm-no" id="exit-no" onclick="hideExitConfirm()">Tidak</button>
+        <button class="exit-confirm-btn exit-confirm-yes" onclick="exitSite()">Ya</button>
+        <button class="exit-confirm-btn exit-confirm-no" onclick="hideExitConfirm()">Tidak</button>
       </div>
     </div>
   </main>
@@ -644,70 +628,67 @@
   </footer>
 
   <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
-  <!-- Added calculator button sound -->
   <audio id="calculatorSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
-  <!-- Added notepad button sound -->
   <audio id="notepadSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
-  <!-- Added new notepad button sound -->
-  <audio id="notepadButtonSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
 
   <script>
+    // Initialize variables
     let rgbEnabled = true;
+    let currentLang = 'id';
+    
+    // Load saved note when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedNote = localStorage.getItem('zenithMarketNote');
+      if (savedNote) {
+        document.getElementById('notepad-textarea').value = savedNote;
+      }
+    });
 
+    // Toggle dark/light mode
     function toggleMode() {
       document.body.classList.toggle('light-mode');
       toggleRGB();
     }
 
+    // Toggle RGB border effect
     function toggleRGB() {
       rgbEnabled = !rgbEnabled;
       const elements = document.querySelectorAll('.rainbow-border');
       
-      if (rgbEnabled) {
-        elements.forEach(el => {
+      elements.forEach(el => {
+        if (rgbEnabled) {
           el.style.animation = 'rainbow-border 5s linear infinite';
-        });
-      } else {
-        elements.forEach(el => {
+        } else {
           el.style.animation = 'none';
-          if (document.body.classList.contains('light-mode')) {
-            el.style.borderColor = 'black';
-          } else {
-            el.style.borderColor = 'white';
-          }
-        });
-      }
+          el.style.borderColor = document.body.classList.contains('light-mode') ? 'black' : 'white';
+        }
+      });
     }
 
-    function copy(number) {
-      navigator.clipboard.writeText(number);
-      document.getElementById("notif").style.display = "block";
-      document.getElementById("clickSound").play();
+    // Copy text to clipboard
+    function copy(text) {
+      navigator.clipboard.writeText(text);
+      showNotification('notif');
+      playSound('clickSound');
+    }
+
+    // Show notification
+    function showNotification(id) {
+      const notif = document.getElementById(id);
+      notif.style.display = "block";
       setTimeout(() => {
-        document.getElementById("notif").style.display = "none";
+        notif.style.display = "none";
       }, 3000);
     }
 
-    function saveNote() {
-      playNotepadButtonSound();
-      const noteText = document.getElementById('notepad-textarea').value;
-      
-      // Save to local storage
-      localStorage.setItem('zenithMarketNote', noteText);
-      
-      // Copy to clipboard
-      navigator.clipboard.writeText(noteText);
-      
-      // Show notification with custom text
-      const notif = document.getElementById('notif-note');
-      notif.innerText = '✨ Catatan berhasil disimpan ke clipboard! 🚀';
-      notif.style.display = 'block';
-      
-      setTimeout(() => {
-        notif.style.display = 'none';
-      }, 3000);
+    // Play sound
+    function playSound(id) {
+      const sound = document.getElementById(id);
+      sound.currentTime = 0;
+      sound.play();
     }
 
+    // Floating menu functions
     function toggleMenu() {
       const menu = document.getElementById("floatingMenu");
       if (menu.style.display === "block") {
@@ -721,6 +702,7 @@
       }
     }
 
+    // Exit confirmation functions
     function showExitConfirm() {
       document.getElementById("exitConfirm").style.display = "block";
       document.getElementById("floatingMenu").style.display = "none";
@@ -731,22 +713,30 @@
     }
 
     function exitSite() {
-      // Try to close the window (works for windows opened by JavaScript)
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        // If no history, redirect to a safe page
         window.location.href = "about:blank";
       }
     }
 
+    // QRIS modal functions
+    function showQRISModal() {
+      document.getElementById("qris-modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("qris-modal").style.display = "none";
+    }
+
+    // Language change function
     function changeLang(lang) {
+      currentLang = lang;
       const teks = {
         id: {
           judul: "Zenith Market", 
           pembayaran: "Pembayaran Digital", 
           peraturan: "📌 Perhatian: Pastikan nominal transfer sesuai dan kirim bukti pembayaran ke admin setelah melakukan transaksi.", 
-          produk: "Produk", 
           qris: "🔍 Perbesar QRIS", 
           notif: "✨ Nomor berhasil disalin ke clipboard! 🚀", 
           notifSave: "✨ Catatan berhasil disimpan ke clipboard! 🚀",
@@ -767,7 +757,6 @@
           judul: "Zenith Market", 
           pembayaran: "Digital Payment", 
           peraturan: "📌 Attention: Make sure the transfer amount is correct and send proof of payment to the admin after making the transaction.",
-          produk: "Product", 
           qris: "🔍 Enlarge QRIS", 
           notif: "✨ Number successfully saved to clipboard! 🚀", 
           notifSave: "✨ Note successfully saved to clipboard! 🚀",
@@ -788,7 +777,6 @@
           judul: "سوق زينيث", 
           pembayaran: "الدفع الرقمي", 
           peraturan: "📌تنبيه: تأكد من صحة مبلغ التحويل وأرسل إثبات الدفع إلى المسؤول بعد إجراء المعاملة.", 
-          produk: "المنتج", 
           qris: "🔍 تكبير QRIS", 
           notif: "✨ تم نسخ الرقم إلى الحافظة بنجاح! 🚀", 
           notifSave: "✨ تم حفظ الملاحظة في الحافظة بنجاح! 🚀",
@@ -813,151 +801,118 @@
       document.getElementById("teks-peraturan").innerText = teks[lang].peraturan;
       document.getElementById("zoom-btn").innerText = teks[lang].qris;
       document.getElementById("notif").innerText = teks[lang].notif;
+      document.getElementById("notif-note").innerText = teks[lang].notifSave;
       document.getElementById("exit").innerText = teks[lang].keluar;
       document.getElementById("exit-confirm-text").innerText = teks[lang].exitConfirm;
-      document.getElementById("exit-yes").innerText = teks[lang].exitYes;
-      document.getElementById("exit-no").innerText = teks[lang].exitNo;
       document.getElementById("group-link").innerText = teks[lang].grup;
       document.getElementById("calculator-title").innerText = teks[lang].calculator;
       document.getElementById("notepad-title").innerText = teks[lang].notepad;
+      document.getElementById("notepad-note").placeholder = teks[lang].notifSave;
       document.getElementById("notepad-textarea").placeholder = teks[lang].notepadPlaceholder;
-      document.getElementById("notif-note").innerText = teks[lang].notifSave;
       
-      // Update all copy buttons
-      document.querySelectorAll("#copy-btn").forEach(btn => {
+      // Update all buttons
+      document.querySelectorAll(".copy-btn").forEach(btn => {
         btn.innerText = teks[lang].salin;
       });
       
-      // Update all order buttons
-      document.querySelectorAll("#order-btn").forEach(btn => {
+      document.querySelectorAll(".order-button").forEach(btn => {
         btn.innerText = teks[lang].order;
       });
       
-      // Update notepad buttons
       document.querySelectorAll(".notepad-btn.save").forEach(btn => {
         btn.innerText = teks[lang].save;
       });
+      
       document.querySelectorAll(".notepad-btn.clear").forEach(btn => {
         btn.innerText = teks[lang].clear;
       });
+      
+      document.querySelectorAll(".exit-confirm-yes").forEach(btn => {
+        btn.innerText = teks[lang].exitYes;
+      });
+      
+      document.querySelectorAll(".exit-confirm-no").forEach(btn => {
+        btn.innerText = teks[lang].exitNo;
+      });
     }
 
-    function showQRISModal() {
-      const modal = document.getElementById("qris-modal");
-      modal.style.display = "flex";
-    }
-
-    function closeModal() {
-      document.getElementById("qris-modal").style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      const modal = document.getElementById("qris-modal");
-      const exitModal = document.getElementById("exitConfirm");
-      if (event.target == modal) {
-        closeModal();
-      }
-      if (event.target == exitModal) {
-        hideExitConfirm();
-      }
-    }
-    
-    // Calculator Functions with sound
-    function playCalculatorSound() {
-      const sound = document.getElementById('calculatorSound');
-      sound.currentTime = 0; // Rewind to start
-      sound.play();
-    }
-    
+    // Calculator functions
     function calculatorAppend(value) {
-      playCalculatorSound();
-      const display = document.getElementById('calculator-display');
-      display.value += value;
+      document.getElementById('calculator-display').value += value;
+      playSound('calculatorSound');
     }
     
     function calculatorClear() {
-      playCalculatorSound();
       document.getElementById('calculator-display').value = '';
       document.getElementById('calculator-result').innerText = '';
+      playSound('calculatorSound');
     }
     
     function calculatorBackspace() {
-      playCalculatorSound();
       const display = document.getElementById('calculator-display');
       display.value = display.value.slice(0, -1);
+      playSound('calculatorSound');
     }
     
     function calculatorCalculate() {
-      playCalculatorSound();
       const display = document.getElementById('calculator-display');
       const resultElement = document.getElementById('calculator-result');
       
       try {
-        // Replace × with * for calculation
         const expression = display.value.replace(/×/g, '*');
         const result = eval(expression);
-        resultElement.innerText = 'Hasil: ' + result;
+        resultElement.innerText = currentLang === 'en' ? 'Result: ' + result : 
+                                currentLang === 'ar' ? 'النتيجة: ' + result : 
+                                'Hasil: ' + result;
       } catch (error) {
-        resultElement.innerText = 'Error';
+        resultElement.innerText = currentLang === 'en' ? 'Error' : 
+                                currentLang === 'ar' ? 'خطأ' : 
+                                'Error';
       }
+      playSound('calculatorSound');
     }
     
-    // Notepad Functions
-    function playNotepadSound() {
-      const sound = document.getElementById('notepadSound');
-      sound.currentTime = 0;
-      sound.play();
-    }
-    
-    function playNotepadButtonSound() {
-      const sound = document.getElementById('notepadButtonSound');
-      sound.currentTime = 0;
-      sound.play();
-    }
-    
-    // Load saved note when page loads
-    window.addEventListener('DOMContentLoaded', (event) => {
-      const savedNote = localStorage.getItem('zenithMarketNote');
-      if (savedNote) {
-        document.getElementById('notepad-textarea').value = savedNote;
-      }
-    });
-    
+    // Notepad functions
     function saveNote() {
-      playNotepadButtonSound();
       const noteText = document.getElementById('notepad-textarea').value;
-      
-      // Save to local storage
       localStorage.setItem('zenithMarketNote', noteText);
-      
-      // Copy to clipboard
       navigator.clipboard.writeText(noteText);
-      
-      // Show notification with custom text
-      const notif = document.getElementById('notif');
-      notif.innerText = 'text_text';
+  
+      // Show the correct notification message
+      const notif = document.getElementById('notif-note');
+      notif.innerText = '✨ Catatan berhasil disimpan ke clipboard! 🚀';
       notif.style.display = 'block';
-      
+  
       setTimeout(() => {
-        notif.style.display = 'none';
+      notif.style.display = 'none';
       }, 3000);
+  
+      playSound('notepadSound');
     }
     
     function clearNote() {
-      playNotepadButtonSound();
-      if (confirm('Apakah Anda yakin ingin menghapus catatan ini?')) {
+      const confirmMsg = currentLang === 'en' ? 'Are you sure you want to clear this note?' :
+                       currentLang === 'ar' ? 'هل أنت متأكد أنك تريد مسح هذه الملاحظة؟' :
+                       'Apakah Anda yakin ingin menghapus catatan ini?';
+      
+      if (confirm(confirmMsg)) {
         document.getElementById('notepad-textarea').value = '';
         localStorage.removeItem('zenithMarketNote');
-        
-        // Show notification
-        const notif = document.getElementById('notif');
-        notif.innerText = '✨ Catatan berhasil dihapus! 🚀';
-        notif.style.display = 'block';
-        
-        setTimeout(() => {
-          notif.style.display = 'none';
-        }, 3000);
+        const notif = document.getElementById('notif-delete');
+        notif.innerText = currentLang === 'en' ? '✨ Note successfully cleared! 🚀' :
+                         currentLang === 'ar' ? '✨ تم مسح الملاحظة بنجاح! 🚀' :
+                         '✨ Catatan berhasil dihapus! 🚀';
+        showNotification('notif-note');
+        playSound('notepadSound');
       }
+    }
+
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById("qris-modal");
+      const exitModal = document.getElementById("exitConfirm");
+      if (event.target == modal) closeModal();
+      if (event.target == exitModal) hideExitConfirm();
     }
   </script>
 </body>
