@@ -51,6 +51,12 @@
       background: var(--content-bg-light);
     }
 
+    .light-mode .calculator {
+      border: 3px solid;
+      color: var(--text-light);
+      background: var(--content-bg-light);
+    }
+
     .product {
       border: 3px solid;
       background: var(--content-bg-dark);
@@ -63,6 +69,17 @@
       background: var(--content-bg-dark);
       color: var(--text-dark);
       transition: all 0.3s ease;
+    }
+    
+    .calculator {
+      border: 3px solid;
+      background: var(--content-bg-dark);
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+      margin: 2rem;
+      padding: 1rem;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
     }
 
     @keyframes rainbow-border {
@@ -352,6 +369,78 @@
       background: #4CAF50;
       color: white;
     }
+    
+    /* Calculator Styles */
+    .calculator-title {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .calculator-input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      background: rgba(0,0,0,0.2);
+      color: white;
+      font-size: 1rem;
+    }
+    
+    .calculator-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+    
+    .calculator-btn {
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .calculator-btn:hover {
+      background: #6a00d4;
+    }
+    
+    .calculator-btn.operator {
+      background: #ff6b00;
+    }
+    
+    .calculator-btn.operator:hover {
+      background: #e05e00;
+    }
+    
+    .calculator-btn.equals {
+      background: #25D366;
+    }
+    
+    .calculator-btn.equals:hover {
+      background: #1da851;
+    }
+    
+    .calculator-btn.clear {
+      background: #ff4d4d;
+    }
+    
+    .calculator-btn.clear:hover {
+      background: #e04444;
+    }
+    
+    .calculator-result {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1.2rem;
+      min-height: 2.5rem;
+    }
 
     @media (max-width: 600px) {
       header {
@@ -411,6 +500,33 @@
       <button class="zoom-btn" id="zoom-btn" onclick="showQRISModal()">🔍 Perbesar QRIS</button>
       <p class="rules" id="teks-peraturan">📌 <strong>Perhatian:</strong> Pastikan nominal transfer sesuai dan kirim bukti pembayaran ke admin setelah melakukan transaksi.</p>
     </section>
+    
+    <!-- Calculator Section -->
+    <section class="calculator rainbow-border">
+      <h2 class="calculator-title" id="calculator-title">Kalkulator Pembayaran</h2>
+      <input type="text" class="calculator-input" id="calculator-display" readonly>
+      <div class="calculator-buttons">
+        <button class="calculator-btn clear" onclick="calculatorClear()">C</button>
+        <button class="calculator-btn operator" onclick="calculatorAppend('/')">/</button>
+        <button class="calculator-btn operator" onclick="calculatorAppend('*')">×</button>
+        <button class="calculator-btn operator" onclick="calculatorBackspace()">⌫</button>
+        <button class="calculator-btn" onclick="calculatorAppend('7')">7</button>
+        <button class="calculator-btn" onclick="calculatorAppend('8')">8</button>
+        <button class="calculator-btn" onclick="calculatorAppend('9')">9</button>
+        <button class="calculator-btn operator" onclick="calculatorAppend('-')">-</button>
+        <button class="calculator-btn" onclick="calculatorAppend('4')">4</button>
+        <button class="calculator-btn" onclick="calculatorAppend('5')">5</button>
+        <button class="calculator-btn" onclick="calculatorAppend('6')">6</button>
+        <button class="calculator-btn operator" onclick="calculatorAppend('+')">+</button>
+        <button class="calculator-btn" onclick="calculatorAppend('1')">1</button>
+        <button class="calculator-btn" onclick="calculatorAppend('2')">2</button>
+        <button class="calculator-btn" onclick="calculatorAppend('3')">3</button>
+        <button class="calculator-btn equals" onclick="calculatorCalculate()" style="grid-row: span 2;">=</button>
+        <button class="calculator-btn" onclick="calculatorAppend('0')" style="grid-column: span 2;">0</button>
+        <button class="calculator-btn" onclick="calculatorAppend('.')">.</button>
+      </div>
+      <div class="calculator-result" id="calculator-result"></div>
+    </section>
 
     <button class="floating-menu-toggle" onclick="toggleMenu()">☰ Menu</button>
     <div class="floating-menu" id="floatingMenu">
@@ -440,6 +556,8 @@
   </footer>
 
   <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
+  <!-- Added calculator button sound -->
+  <audio id="calculatorSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
 
   <script>
     let rgbEnabled = true;
@@ -525,7 +643,8 @@
           keluar: "Keluar Situs", 
           exitConfirm: "Apakah Anda yakin ingin keluar dari situs?", 
           exitYes: "Ya", 
-          exitNo: "Tidak"
+          exitNo: "Tidak",
+          calculator: "Kalkulator Pembayaran"
         },
         en: {
           judul: "Zenith Market", 
@@ -540,7 +659,8 @@
           keluar: "Exit Site", 
           exitConfirm: "Are you sure you want to exit the site?", 
           exitYes: "Yes", 
-          exitNo: "No"
+          exitNo: "No",
+          calculator: "Payment Calculator"
         },
         ar: {
           judul: "سوق زينيث", 
@@ -555,7 +675,8 @@
           keluar: "الخروج من الموقع", 
           exitConfirm: "هل أنت متأكد أنك تريد الخروج من الموقع؟", 
           exitYes: "نعم", 
-          exitNo: "لا"
+          exitNo: "لا",
+          calculator: "حاسبة الدفع"
         }
       };
       
@@ -570,6 +691,7 @@
       document.getElementById("exit-yes").innerText = teks[lang].exitYes;
       document.getElementById("exit-no").innerText = teks[lang].exitNo;
       document.getElementById("group-link").innerText = teks[lang].grup;
+      document.getElementById("calculator-title").innerText = teks[lang].calculator;
       
       // Update all copy buttons
       document.querySelectorAll("#copy-btn").forEach(btn => {
@@ -599,6 +721,46 @@
       }
       if (event.target == exitModal) {
         hideExitConfirm();
+      }
+    }
+    
+    // Calculator Functions with sound
+    function playCalculatorSound() {
+      const sound = document.getElementById('calculatorSound');
+      sound.currentTime = 0; // Rewind to start
+      sound.play();
+    }
+    
+    function calculatorAppend(value) {
+      playCalculatorSound();
+      const display = document.getElementById('calculator-display');
+      display.value += value;
+    }
+    
+    function calculatorClear() {
+      playCalculatorSound();
+      document.getElementById('calculator-display').value = '';
+      document.getElementById('calculator-result').innerText = '';
+    }
+    
+    function calculatorBackspace() {
+      playCalculatorSound();
+      const display = document.getElementById('calculator-display');
+      display.value = display.value.slice(0, -1);
+    }
+    
+    function calculatorCalculate() {
+      playCalculatorSound();
+      const display = document.getElementById('calculator-display');
+      const resultElement = document.getElementById('calculator-result');
+      
+      try {
+        // Replace × with * for calculation
+        const expression = display.value.replace(/×/g, '*');
+        const result = eval(expression);
+        resultElement.innerText = 'Hasil: ' + result;
+      } catch (error) {
+        resultElement.innerText = 'Error';
       }
     }
   </script>
