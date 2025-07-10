@@ -465,6 +465,50 @@
       background: #e04444;
     }
 
+    /* Delete Confirmation Styles */
+    .delete-confirm {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--notif-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: var(--notif-glow);
+      z-index: 10001;
+      text-align: center;
+      display: none;
+    }
+
+    .delete-confirm p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .delete-confirm-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .delete-confirm-btn {
+      padding: 0.5rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .delete-confirm-yes {
+      background: #ff4d4d;
+      color: white;
+    }
+
+    .delete-confirm-no {
+      background: #4CAF50;
+      color: white;
+    }
+
     @media (max-width: 600px) {
       header {
         flex-direction: column;
@@ -556,9 +600,9 @@
 
     <section class="gateway rainbow-border">
       <h2 id="judul-pembayaran">Pembayaran Digital</h2>
-      <p>082217179612 <button class="copy-btn" onclick="copy('082217179612')">Salin</button></p>
-      <p>082350804883 <button class="copy-btn" onclick="copy('082350804883')">Salin</button></p>
-      <p>082350804883 <button class="copy-btn" onclick="copy('082350804883')">Salin</button></p>
+      <p>Dana: 082217179612 <button class="copy-btn" onclick="copy('082217179612')">Salin</button></p>
+      <p>Ovo: 082350804883 <button class="copy-btn" onclick="copy('082350804883')">Salin</button></p>
+      <p>Gopay: 082350804883 <button class="copy-btn" onclick="copy('082350804883')">Salin</button></p>
       <p>QRIS:<br><img id="qris-img" src="https://qu.ax/acLyy.jpg" alt="QRIS" /></p>
       <button class="zoom-btn" onclick="showQRISModal()">🔍 Perbesar QRIS</button>
       <p class="rules" id="teks-peraturan">📌 <strong>Perhatian:</strong> Pastikan nominal transfer sesuai dan kirim bukti pembayaran ke admin setelah melakukan transaksi.</p>
@@ -597,9 +641,18 @@
       <textarea class="notepad-textarea" id="notepad-textarea" placeholder="Tulis catatan Anda di sini..."></textarea>
       <div class="notepad-buttons">
         <button class="notepad-btn save" onclick="saveNote()">💾 Simpan</button>
-        <button class="notepad-btn clear" onclick="clearNote()">🧹 Bersihkan</button>
+        <button class="notepad-btn clear" onclick="showDeleteConfirm()">🧹 Bersihkan</button>
       </div>
     </section>
+
+    <!-- Delete Confirmation Dialog -->
+    <div class="delete-confirm" id="deleteConfirm">
+      <p id="delete-confirm-text">Apakah Anda yakin ingin menghapus catatan ini?</p>
+      <div class="delete-confirm-btns">
+        <button class="delete-confirm-btn delete-confirm-yes" onclick="clearNote()">Ya</button>
+        <button class="delete-confirm-btn delete-confirm-no" onclick="hideDeleteConfirm()">Tidak</button>
+      </div>
+    </div>
 
     <button class="floating-menu-toggle" onclick="toggleMenu()">☰ Menu</button>
     <div class="floating-menu" id="floatingMenu">
@@ -631,6 +684,7 @@
   <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
   <audio id="calculatorSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
   <audio id="notepadSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
+  <audio id="clearSound" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
 
   <script>
     // Initialize variables
@@ -721,14 +775,6 @@
       }
     }
 
-    function deleteSite() {
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = "about:blank";
-      }
-    }
-
     // QRIS modal functions
     function showQRISModal() {
       document.getElementById("qris-modal").style.display = "flex";
@@ -736,6 +782,17 @@
 
     function closeModal() {
       document.getElementById("qris-modal").style.display = "none";
+    }
+
+    // Delete confirmation functions
+    function showDeleteConfirm() {
+      document.getElementById("deleteConfirm").style.display = "block";
+      playSound('clickSound');
+    }
+
+    function hideDeleteConfirm() {
+      document.getElementById("deleteConfirm").style.display = "none";
+      playSound('clickSound');
     }
 
     // Language change function
@@ -814,16 +871,16 @@
       document.getElementById("judul").innerText = teks[lang].judul;
       document.getElementById("judul-pembayaran").innerText = teks[lang].pembayaran;
       document.getElementById("teks-peraturan").innerText = teks[lang].peraturan;
-      document.getElementById("zoom-btn").innerText = teks[lang].qris;
+      document.querySelector(".zoom-btn").innerText = teks[lang].qris;
       document.getElementById("notif").innerText = teks[lang].notif;
       document.getElementById("notif-note").innerText = teks[lang].notifSave;
       document.getElementById("notif-delete").innerText = teks[lang].notifDelete;
       document.getElementById("exit").innerText = teks[lang].keluar;
       document.getElementById("exit-confirm-text").innerText = teks[lang].exitConfirm;
+      document.getElementById("delete-confirm-text").innerText = teks[lang].deleteConfirm;
       document.getElementById("group-link").innerText = teks[lang].grup;
       document.getElementById("calculator-title").innerText = teks[lang].calculator;
       document.getElementById("notepad-title").innerText = teks[lang].notepad;
-      document.getElementById("notepad-note").placeholder = teks[lang].notifSave;
       document.getElementById("notepad-textarea").placeholder = teks[lang].notepadPlaceholder;
 
       // Update all buttons
@@ -848,6 +905,14 @@
       });
       
       document.querySelectorAll(".exit-confirm-no").forEach(btn => {
+        btn.innerText = teks[lang].exitNo;
+      });
+      
+      document.querySelectorAll(".delete-confirm-yes").forEach(btn => {
+        btn.innerText = teks[lang].exitYes;
+      });
+      
+      document.querySelectorAll(".delete-confirm-no").forEach(btn => {
         btn.innerText = teks[lang].exitNo;
       });
     }
@@ -893,42 +958,26 @@
       const noteText = document.getElementById('notepad-textarea').value;
       localStorage.setItem('zenithMarketNote', noteText);
       navigator.clipboard.writeText(noteText);
-  
-      // Show the correct notification message
-      const notif = document.getElementById('notif-note');
-      notif.innerText = '✨ Catatan berhasil disimpan ke clipboard! 🚀';
-      notif.style.display = 'block';
-  
-      setTimeout(() => {
-      notif.style.display = 'none';
-      }, 3000);
-  
+      showNotification('notif-note');
       playSound('notepadSound');
     }
     
     function clearNote() {
-      const confirmMsg = currentLang === 'en' ? 'Are you sure you want to clear this note?' :
-                       currentLang === 'ar' ? 'هل أنت متأكد أنك تريد مسح هذه الملاحظة؟' :
-                       'Apakah Anda yakin ingin menghapus catatan ini?';
-      
-      if (confirm(confirmMsg)) {
-        document.getElementById('notepad-textarea').value = '';
-        localStorage.removeItem('zenithMarketNote');
-        const notif = document.getElementById('notif-delete');
-        notif.innerText = currentLang === 'en' ? '✨ Note successfully cleared! 🚀' :
-                         currentLang === 'ar' ? '✨ تم مسح الملاحظة بنجاح! 🚀' :
-                         '✨ Catatan berhasil dihapus! 🚀';
-        showNotification('notif-note');
-        playSound('notepadSound');
-      }
+      document.getElementById('notepad-textarea').value = '';
+      localStorage.removeItem('zenithMarketNote');
+      showNotification('notif-delete');
+      hideDeleteConfirm();
+      playSound('clearSound'); // Play the clear sound effect
     }
 
     // Close modals when clicking outside
     window.onclick = function(event) {
       const modal = document.getElementById("qris-modal");
       const exitModal = document.getElementById("exitConfirm");
+      const deleteModal = document.getElementById("deleteConfirm");
       if (event.target == modal) closeModal();
       if (event.target == exitModal) hideExitConfirm();
+      if (event.target == deleteModal) hideDeleteConfirm();
     }
   </script>
 </body>
