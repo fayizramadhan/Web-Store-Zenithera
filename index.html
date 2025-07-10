@@ -555,7 +555,8 @@
   </header>
 
   <div class="notif" id="notif">✨ Nomor berhasil disalin ke clipboard! 🚀</div>
-
+  <div class="notif" id="notif-note">✨ Catatan berhasil disimpan ke clipboard! 🚀</div>
+  
   <main>
     <section class="products">
       <div class="product rainbow-border"><img src="https://files.catbox.moe/zpsevm.jpg" /><p class="produk">Top Up MLBB</p><a class="order-button" id="order-btn" href="https://wa.me/6282350804883">Order Sekarang</a></div>
@@ -820,6 +821,7 @@
       document.getElementById("calculator-title").innerText = teks[lang].calculator;
       document.getElementById("notepad-title").innerText = teks[lang].notepad;
       document.getElementById("notepad-textarea").placeholder = teks[lang].notepadPlaceholder;
+      document.getElementById("notif-note").innerText = teks[lang].notifSave;
       
       // Update all copy buttons
       document.querySelectorAll("#copy-btn").forEach(btn => {
