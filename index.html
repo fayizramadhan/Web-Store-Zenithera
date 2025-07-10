@@ -508,6 +508,7 @@
 
   <div class="notif" id="notif">✨ Nomor berhasil disalin ke clipboard! 🚀</div>
   <div class="notif" id="notif-note">✨ Catatan berhasil disimpan ke clipboard! 🚀</div>
+  <div class="notif" id="notif-delete">✨ Catatan berhasil dihapus! 🚀</div>
   
   <main>
     <section class="products">
@@ -612,6 +613,13 @@
     <div id="qris-modal" class="modal">
       <span class="close-modal" onclick="closeModal()">&times;</span>
       <img class="modal-content" id="modal-qris-img" src="https://qu.ax/acLyy.jpg" alt="QRIS Modal">
+    </div>
+
+    <div class="delete-Confirm" id="deleteConfirm">
+      <p id="delete-Confirm-text">Apakah Anda yakin ingin menghapus catatan ini?</p>
+      <div class="delete-Confirm-btns">
+        <button class="delete-confirm-btn delete-confirm-yes" onclick="deleteNote()">Ya</button>
+        <button class="delete-confirm-btn delete-confirm-no" onclick="hidedeleteConfirm()">Tidak</button>
     </div>
 
     <div class="exit-confirm" id="exitConfirm">
@@ -720,6 +728,23 @@
       }
     }
 
+    function showDeleteConfirm() {
+      document.getElementById("deleteConfirm").style.display = "block";
+      document.getElementById("floatingMenu").style.display = "none";
+    }
+
+      function hideDeleteConfirm() {
+      document.getElementById("deleteConfirm").style.display = "none";
+    }
+
+    function deleteSite() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "about:blank";
+      }
+    }
+
     // QRIS modal functions
     function showQRISModal() {
       document.getElementById("qris-modal").style.display = "flex";
@@ -745,8 +770,11 @@
           grup: "Gabung Grup Kami", 
           keluar: "Keluar Situs", 
           exitConfirm: "Apakah Anda yakin ingin keluar dari situs?", 
+          deleteConfirm: "Apakah Anda yakin ingin menghapus catatan ini?",
           exitYes: "Ya", 
           exitNo: "Tidak",
+          deleteYes: "Ya",
+          deleteNo: "Tidak",
           calculator: "Kalkulator Digital",
           notepad: "Catatan Digital",
           notepadPlaceholder: "Tulis catatan Anda di sini...",
@@ -765,8 +793,11 @@
           grup: "Join Our Group", 
           keluar: "Exit Site", 
           exitConfirm: "Are you sure you want to exit the site?", 
-          exitYes: "Yes", 
+          deleteConfirm: "Are you sure you want to delete this note?",
+          exitYes: "Yes",
           exitNo: "No",
+          deleteYes: "Yes",
+          deleteNo: "No",
           calculator: "Digital Calculator",
           notepad: "Digital Notepad",
           notepadPlaceholder: "Write your notes here...",
@@ -785,8 +816,11 @@
           grup: "انضم إلى مجموعتنا", 
           keluar: "الخروج من الموقع", 
           exitConfirm: "هل أنت متأكد أنك تريد الخروج من الموقع؟", 
+          deleteConfirm: "هل أنت متأكد أنك تريد حذف هذه الملاحظة؟",
           exitYes: "نعم", 
           exitNo: "لا",
+          deleteYes: "نعم",
+          deleteNo: "لا",
           calculator: "آلة حاسبة رقمية",
           notepad: "دفتر ملاحظات رقمي",
           notepadPlaceholder: "اكتب ملاحظاتك هنا...",
@@ -809,7 +843,9 @@
       document.getElementById("notepad-title").innerText = teks[lang].notepad;
       document.getElementById("notepad-note").placeholder = teks[lang].notifSave;
       document.getElementById("notepad-textarea").placeholder = teks[lang].notepadPlaceholder;
-      
+      document.getElementById("notif-note").innerText = teks[lang].notifSave;
+      document.getElementById("delete-Confirm").innerText = teks[lang].deleteConfirm;
+
       // Update all buttons
       document.querySelectorAll(".copy-btn").forEach(btn => {
         btn.innerText = teks[lang].salin;
@@ -833,7 +869,13 @@
       
       document.querySelectorAll(".exit-confirm-no").forEach(btn => {
         btn.innerText = teks[lang].exitNo;
-      });
+
+      document.querySelectorAll(".delete-Confirm-yes").forEach(btn => {
+        btn.innerText = teks[lang].exitYes;
+
+      document.querySelectorAll(".delete-Confirm-no").forEach(btn => {
+        btn.innerText = teks[lang].exitNo;
+      }); 
     }
 
     // Calculator functions
